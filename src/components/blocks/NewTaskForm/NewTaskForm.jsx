@@ -1,13 +1,13 @@
 /* eslint-disable react/prop-types */
-import { useState } from "react";
+import { useState } from 'react';
 
 export default function NewTaskForm({ addTodo }) {
-  const [newTodoValue, setNewTodoValue] = useState("");
+  const [newTodoValue, setNewTodoValue] = useState('');
 
   function keyDownHandler(e) {
-    if (e.code === "Enter" && newTodoValue.trim()) {
+    if (e.code === 'Enter' && newTodoValue.trim()) {
       addTodo(newTodoValue);
-      setNewTodoValue("");
+      setNewTodoValue('');
     }
   }
 

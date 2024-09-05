@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import TasksFilter from "../TasksFilter/TasksFilter";
+import TasksFilter from '../TasksFilter/TasksFilter';
 
 export default function Footer({ filter }) {
   return (
