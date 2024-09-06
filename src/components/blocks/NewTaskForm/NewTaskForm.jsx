@@ -4,7 +4,7 @@ import { useState } from 'react';
 export default function NewTaskForm({ addTodo }) {
   const [newTodoValue, setNewTodoValue] = useState('');
 
-  function keyDownHandler(e) {
+  function keyUpHandler(e) {
     if (e.code === 'Enter' && newTodoValue.trim()) {
       addTodo(newTodoValue);
       setNewTodoValue('');
@@ -20,7 +20,7 @@ export default function NewTaskForm({ addTodo }) {
         autoFocus
         value={newTodoValue}
         onChange={(e) => setNewTodoValue(e.target.value)}
-        onKeyUp={(e) => keyDownHandler(e)}
+        onKeyUp={(e) => keyUpHandler(e)}
       />
     </header>
   );

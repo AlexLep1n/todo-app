@@ -1,8 +1,7 @@
-import NewTaskForm from '../components/blocks/NewTaskForm/NewTaskForm';
-import TaskList from '../components/blocks/TaskList/TaskList';
+import NewTaskForm from '../components/Blocks/NewTaskForm/NewTaskForm';
+import TaskList from '../components/Blocks/TaskList/TaskList';
 import Footer from '../components/blocks/Footer/Footer';
 import { useMemo, useState } from 'react';
-import { formatDistanceToNow } from 'date-fns';
 
 export default function MainPage() {
   const [todos, setTodos] = useState([]);
@@ -10,15 +9,51 @@ export default function MainPage() {
 
   function addTodo(value) {
     const data = {
-      id: new Date(),
+      id: Date.now(),
+      date: new Date(),
       completed: false,
       description: value,
-      createdDate: formatDistanceToNow(new Date(new Date()), {
-        includeSeconds: true,
-        addSuffix: true,
-      }),
+      editing: false,
     };
     setTodos([...todos, data]);
+  }
+
+  function deleteTodo(elemId) {
+    setTodos((todos) => todos.filter((todo) => todo.id !== elemId));
+  }
+
+  function toggleComplete(elemId, completeStatus) {
+    setTodos((todos) =>
+      todos.map((todo) => {
+        if (todo.id === elemId) {
+          todo.completed = completeStatus;
+        }
+        return todo;
+      })
+    );
+  }
+
+  function editTodo(elemId, newValue) {
+    setTodos((todos) =>
+      todos.map((todo) => {
+        if (todo.id === elemId) {
+          todo.description = newValue;
+        }
+        return todo;
+      })
+    );
+    toggleTodoEditing(elemId);
+  }
+
+  function toggleTodoEditing(elemId) {
+    setTodos((todos) =>
+      todos.map((todo) => {
+        if (todo.id === elemId) {
+          todo.editing = !todo.editing;
+        }
+        return todo;
+      })
+    );
   }
 
   const memoTodos = useMemo(() => {
@@ -33,14 +68,19 @@ export default function MainPage() {
         return todo;
       });
     }
-
-    filteredTodos();
+    return filteredTodos();
   }, [filter, todos]);
 
   return (
     <>
       <NewTaskForm addTodo={addTodo} />
-      <TaskList todos={memoTodos} />
+      <TaskList
+        todos={memoTodos}
+        toggleComplete={toggleComplete}
+        deleteTodo={deleteTodo}
+        editTodo={editTodo}
+        toggleTodoEditing={toggleTodoEditing}
+      />
       <Footer filter={filter} />
     </>
   );
