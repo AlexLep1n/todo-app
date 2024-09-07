@@ -51,7 +51,12 @@ export default function Task({
       </div>
       {editing && (
         <form onSubmit={(e) => saveEditingTodo(e)}>
-          <input type="text" className="edit" value={editValue} onChange={(e) => setEditValue(e.target.value)} />
+          <input
+            type="text"
+            className="edit"
+            value={editValue}
+            onChange={(e) => setEditValue(e.target.value)}
+          />
         </form>
       )}
     </>

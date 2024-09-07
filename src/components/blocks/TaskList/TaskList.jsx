@@ -1,11 +1,20 @@
 import Task from '../Task/Task';
 import PropTypes from 'prop-types';
 
-export default function TaskList({ todos = [], toggleComplete, deleteTodo, editTodo, toggleEditing }) {
+export default function TaskList({
+  todos = [],
+  toggleComplete,
+  deleteTodo,
+  editTodo,
+  toggleEditing,
+}) {
   return (
     <ul className="todo-list">
       {todos.map((todo) => (
-        <li key={todo.id} className={todo.completed ? 'completed' : todo.editing ? 'editing' : null}>
+        <li
+          key={todo.id}
+          className={todo.completed ? 'completed' : todo.editing ? 'editing' : null}
+        >
           <Task
             {...todo}
             toggleComplete={toggleComplete}
