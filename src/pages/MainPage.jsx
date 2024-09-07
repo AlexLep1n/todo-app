@@ -58,11 +58,11 @@ export default function MainPage() {
   const memoTodos = useMemo(() => {
     function filteredTodos() {
       return todos.filter((todo) => {
-        if (filter === 'Completed') {
-          return todo.completed;
-        }
         if (filter === 'Active') {
           return !todo.completed;
+        }
+        if (filter === 'Completed') {
+          return todo.completed;
         }
         return todo;
       });
@@ -80,7 +80,7 @@ export default function MainPage() {
         editTodo={editTodo}
         toggleEditing={toggleEditing}
       />
-      <Footer filter={filter} />
+      <Footer filter={filter} todos={memoTodos} changeFilter={(value) => setFilter(value)} />
     </>
   );
 }
