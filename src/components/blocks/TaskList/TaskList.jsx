@@ -1,12 +1,11 @@
-/* eslint-disable react/prop-types */
 import Task from '../Task/Task';
+import PropTypes from 'prop-types';
 
-export default function TaskList({ todos, toggleComplete, deleteTodo, editTodo, toggleEditing }) {
+export default function TaskList({ todos = [], toggleComplete, deleteTodo, editTodo, toggleEditing }) {
   return (
     <ul className="todo-list">
-      {todos?.map((todo) => (
+      {todos.map((todo) => (
         <li key={todo.id} className={todo.completed ? 'completed' : todo.editing ? 'editing' : null}>
-          {/* При изменении добавляет класс к li (completed || editing) */}
           <Task
             {...todo}
             toggleComplete={toggleComplete}
@@ -19,3 +18,11 @@ export default function TaskList({ todos, toggleComplete, deleteTodo, editTodo, 
     </ul>
   );
 }
+
+TaskList.propTypes = {
+  todos: PropTypes.array,
+  toggleComplete: PropTypes.func.isRequired,
+  deleteTodo: PropTypes.func.isRequired,
+  editTodo: PropTypes.func.isRequired,
+  toggleEditing: PropTypes.func.isRequired,
+};

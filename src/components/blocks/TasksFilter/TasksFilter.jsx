@@ -1,5 +1,6 @@
-/* eslint-disable react/prop-types */
-export default function TasksFilter({ filter, changeFilter }) {
+import PropTypes from 'prop-types';
+
+export default function TasksFilter({ filter = 'All', changeFilter }) {
   return (
     <ul className="filters">
       <li>
@@ -20,3 +21,8 @@ export default function TasksFilter({ filter, changeFilter }) {
     </ul>
   );
 }
+
+TasksFilter.propTypes = {
+  filter: PropTypes.string,
+  changeFilter: PropTypes.func.isRequired,
+};

@@ -1,5 +1,5 @@
-/* eslint-disable react/prop-types */
 import { useState } from 'react';
+import PropTypes from 'prop-types';
 
 export default function NewTaskForm({ addTodo }) {
   const [newTodoValue, setNewTodoValue] = useState('');
@@ -25,3 +25,7 @@ export default function NewTaskForm({ addTodo }) {
     </header>
   );
 }
+
+NewTaskForm.propTypes = {
+  addTodo: PropTypes.func.isRequired,
+};

@@ -1,7 +1,7 @@
+import PropTypes from 'prop-types';
 import { formatDistanceToNow } from 'date-fns';
 import { enUS } from 'date-fns/locale';
 import { useState } from 'react';
-/* eslint-disable react/prop-types */
 
 export default function Task({
   id,
@@ -57,3 +57,15 @@ export default function Task({
     </>
   );
 }
+
+Task.propTypes = {
+  id: PropTypes.number.isRequired,
+  description: PropTypes.string.isRequired,
+  date: PropTypes.object.isRequired,
+  completed: PropTypes.bool.isRequired,
+  editing: PropTypes.bool.isRequired,
+  toggleComplete: PropTypes.func.isRequired,
+  deleteTodo: PropTypes.func.isRequired,
+  editTodo: PropTypes.func.isRequired,
+  toggleEditing: PropTypes.func.isRequired,
+};

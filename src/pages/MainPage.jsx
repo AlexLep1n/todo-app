@@ -70,6 +70,21 @@ export default function MainPage() {
     return filteredTodos();
   }, [filter, todos]);
 
+  function clearCompleted() {
+    setTodos((todos) => todos.filter((todo) => !todo.completed));
+  }
+
+  const memoShowTodosCount = useMemo(() => {
+    function showTodosCount() {
+      if (filter !== 'Completed') {
+        return todos.filter((todo) => !todo.completed).length;
+      }
+      return todos.filter((todo) => todo.completed).length;
+    }
+
+    return showTodosCount();
+  }, [filter, todos]);
+
   return (
     <>
       <NewTaskForm addTodo={addTodo} />
@@ -80,7 +95,12 @@ export default function MainPage() {
         editTodo={editTodo}
         toggleEditing={toggleEditing}
       />
-      <Footer filter={filter} todos={memoTodos} changeFilter={(value) => setFilter(value)} />
+      <Footer
+        filter={filter}
+        changeFilter={(value) => setFilter(value)}
+        clearCompleted={clearCompleted}
+        leftTodos={memoShowTodosCount}
+      />
     </>
   );
 }
