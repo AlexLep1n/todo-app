@@ -42,14 +42,13 @@ export default function MainPage() {
         return todo;
       })
     );
-    toggleTodoEditing(elemId);
   }
 
-  function toggleTodoEditing(elemId) {
+  function toggleEditing(elemId, status) {
     setTodos((todos) =>
       todos.map((todo) => {
         if (todo.id === elemId) {
-          todo.editing = !todo.editing;
+          todo.editing = status;
         }
         return todo;
       })
@@ -79,7 +78,7 @@ export default function MainPage() {
         toggleComplete={toggleComplete}
         deleteTodo={deleteTodo}
         editTodo={editTodo}
-        toggleTodoEditing={toggleTodoEditing}
+        toggleEditing={toggleEditing}
       />
       <Footer filter={filter} />
     </>

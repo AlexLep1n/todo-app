@@ -7,23 +7,27 @@ export default function Task({
   id,
   description,
   date,
-  editing,
   completed,
+  editing,
   toggleComplete,
   deleteTodo,
   editTodo,
-  toggleTodoEditing,
+  toggleEditing,
 }) {
-  const [editValue, seteditValue] = useState('');
+  const [editValue, setEditValue] = useState(description);
 
   function saveEditingTodo(e) {
     e.preventDefault();
     editTodo(id, editValue);
+    toggleEditing(id, false);
+  }
+
+  function changeEditStatus() {
+    toggleEditing(id, true);
   }
 
   return (
     <>
-      {/* При изменении добавляет класс к li (completed || editing) */}
       <div className="view">
         <input
           id={id}
@@ -42,12 +46,12 @@ export default function Task({
             })}`}
           </span>
         </label>
-        <button onClick={() => toggleTodoEditing(id)} className="icon icon-edit"></button>
+        <button onClick={() => changeEditStatus()} className="icon icon-edit"></button>
         <button onClick={() => deleteTodo(id)} className="icon icon-destroy"></button>
       </div>
       {editing && (
         <form onSubmit={(e) => saveEditingTodo(e)}>
-          <input type="text" className="edit" value={editValue} onChange={(e) => seteditValue(e.target.value)} />
+          <input type="text" className="edit" value={editValue} onChange={(e) => setEditValue(e.target.value)} />
         </form>
       )}
     </>
