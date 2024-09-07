@@ -1,5 +1,5 @@
-import NewTaskForm from '../components/Blocks/NewTaskForm/NewTaskForm';
-import TaskList from '../components/Blocks/TaskList/TaskList';
+import NewTaskForm from '../components/blocks/NewTaskForm/NewTaskForm';
+import TaskList from '../components/blocks/TaskList/TaskList';
 import Footer from '../components/blocks/Footer/Footer';
 import { useMemo, useState } from 'react';
 
