@@ -8,13 +8,15 @@
     "build": "vite build",
     "lint": "eslint .",
     "lint:fix": "eslint  ./src --fix",
+    "format": "prettier --write",
     "preview": "vite preview",
     "prepare": "husky"
   },
   "lint-staged": {
     "*.(js|jsx)": [
+      "npm run lint",
       "npm run lint:fix",
-      "git add"
+      "npm run format"
     ]
   },
   "dependencies": {
