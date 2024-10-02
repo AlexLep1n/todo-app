@@ -14,14 +14,18 @@ export default function NewTaskForm({ addTodo }) {
   return (
     <header className="header">
       <h1>Todos</h1>
-      <input
-        className="new-todo"
-        placeholder="What needs to be done?"
-        autoFocus
-        value={newTodoValue}
-        onChange={(e) => setNewTodoValue(e.target.value)}
-        onKeyUp={(e) => keyUpHandler(e)}
-      />
+      <form className="new-todo-form">
+        <input
+          className="new-todo"
+          placeholder="What needs to be done?"
+          autoFocus
+          value={newTodoValue}
+          onChange={(e) => setNewTodoValue(e.target.value)}
+          onKeyUp={(e) => keyUpHandler(e)}
+        />
+        <input className="new-todo-form__timer" placeholder="Min" autoFocus />
+        <input className="new-todo-form__timer" placeholder="Sec" autoFocus />
+      </form>
     </header>
   );
 }

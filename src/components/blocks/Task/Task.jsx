@@ -37,8 +37,13 @@ export default function Task({
           onChange={(e) => toggleComplete(id, e.target.checked)}
         />
         <label htmlFor={id}>
-          <span className="description">{description}</span>
-          <span className="created">
+          <span className="title">{description}</span>
+          <span className="description">
+            <button className="icon icon-play"></button>
+            <button className="icon icon-pause"></button>
+            12:25
+          </span>
+          <span className="description">
             {`created ${formatDistanceToNow(date, {
               locale: enUS,
               includeSeconds: true,
