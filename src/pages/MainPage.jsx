@@ -2,19 +2,22 @@ import NewTaskForm from '../components/blocks/NewTaskForm/NewTaskForm';
 import TaskList from '../components/blocks/TaskList/TaskList';
 import Footer from '../components/blocks/Footer/Footer';
 import { useMemo, useState } from 'react';
+import convertTimeInMs from '../utils/convertTimeInMs';
 
 export default function MainPage() {
   const [todos, setTodos] = useState([]);
   const [filter, setFilter] = useState('All');
 
-  function addTodo(value) {
+  function addTodo({ text, min, sec }) {
     const data = {
       id: Date.now(),
       date: new Date(),
       completed: false,
-      description: value,
+      description: text,
       editing: false,
+      timer: { timeStart: 0, timeLeft: convertTimeInMs(+min, +sec) },
     };
+    console.log(data.timer.timeLeft);
     setTodos([...todos, data]);
   }
 
@@ -38,6 +41,29 @@ export default function MainPage() {
       todos.map((todo) => {
         if (todo.id === elemId) {
           todo.description = newValue;
+        }
+        return todo;
+      })
+    );
+  }
+
+  function StopTimer(elemId, time) {
+    setTodos((todos) =>
+      todos.map((todo) => {
+        if (todo.id === elemId) {
+          todo.timer.timeLeft = time;
+          todo.timer.timeStart = 0;
+        }
+        return todo;
+      })
+    );
+  }
+
+  function startTimer(elemId) {
+    setTodos((todos) =>
+      todos.map((todo) => {
+        if (todo.id === elemId) {
+          todo.timer.timeStart = Date.now();
         }
         return todo;
       })
@@ -94,6 +120,8 @@ export default function MainPage() {
         deleteTodo={deleteTodo}
         editTodo={editTodo}
         toggleEditing={toggleEditing}
+        StopTimer={StopTimer}
+        startTimer={startTimer}
       />
       <Footer
         filter={filter}

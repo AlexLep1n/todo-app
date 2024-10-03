@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import { formatDistanceToNow } from 'date-fns';
 import { enUS } from 'date-fns/locale';
 import { useState } from 'react';
+import Timer from '../../parts/Timer';
 
 export default function Task({
   id,
@@ -9,10 +10,13 @@ export default function Task({
   date,
   completed,
   editing,
+  timer,
   toggleComplete,
   deleteTodo,
   editTodo,
   toggleEditing,
+  StopTimer,
+  startTimer,
 }) {
   const [editValue, setEditValue] = useState(description);
 
@@ -38,11 +42,7 @@ export default function Task({
         />
         <label htmlFor={id}>
           <span className="title">{description}</span>
-          <span className="description">
-            <button className="icon icon-play"></button>
-            <button className="icon icon-pause"></button>
-            12:25
-          </span>
+          <Timer id={id} timer={timer} StopTimer={StopTimer} startTimer={startTimer} />
           <span className="description">
             {`created ${formatDistanceToNow(date, {
               locale: enUS,
@@ -74,8 +74,11 @@ Task.propTypes = {
   date: PropTypes.object.isRequired,
   completed: PropTypes.bool.isRequired,
   editing: PropTypes.bool.isRequired,
+  timer: PropTypes.object.isRequired,
   toggleComplete: PropTypes.func.isRequired,
   deleteTodo: PropTypes.func.isRequired,
   editTodo: PropTypes.func.isRequired,
   toggleEditing: PropTypes.func.isRequired,
+  StopTimer: PropTypes.func.isRequired,
+  startTimer: PropTypes.func.isRequired,
 };

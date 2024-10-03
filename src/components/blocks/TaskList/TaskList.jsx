@@ -7,6 +7,8 @@ export default function TaskList({
   deleteTodo,
   editTodo,
   toggleEditing,
+  StopTimer,
+  startTimer,
 }) {
   return (
     <ul className="todo-list">
@@ -21,6 +23,8 @@ export default function TaskList({
             deleteTodo={deleteTodo}
             editTodo={editTodo}
             toggleEditing={toggleEditing}
+            StopTimer={StopTimer}
+            startTimer={startTimer}
           />
         </li>
       ))}
@@ -34,4 +38,6 @@ TaskList.propTypes = {
   deleteTodo: PropTypes.func.isRequired,
   editTodo: PropTypes.func.isRequired,
   toggleEditing: PropTypes.func.isRequired,
+  StopTimer: PropTypes.func.isRequired,
+  startTimer: PropTypes.func.isRequired,
 };
