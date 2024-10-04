@@ -15,7 +15,7 @@ export default function Task({
   deleteTodo,
   editTodo,
   toggleEditing,
-  StopTimer,
+  stopTimer,
   startTimer,
 }) {
   const [editValue, setEditValue] = useState(description);
@@ -42,7 +42,7 @@ export default function Task({
         />
         <label htmlFor={id}>
           <span className="title">{description}</span>
-          <Timer id={id} timer={timer} StopTimer={StopTimer} startTimer={startTimer} />
+          <Timer id={id} timer={timer} stopTimer={stopTimer} startTimer={startTimer} />
           <span className="description">
             {`created ${formatDistanceToNow(date, {
               locale: enUS,
@@ -79,6 +79,6 @@ Task.propTypes = {
   deleteTodo: PropTypes.func.isRequired,
   editTodo: PropTypes.func.isRequired,
   toggleEditing: PropTypes.func.isRequired,
-  StopTimer: PropTypes.func.isRequired,
+  stopTimer: PropTypes.func.isRequired,
   startTimer: PropTypes.func.isRequired,
 };

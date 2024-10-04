@@ -17,7 +17,6 @@ export default function MainPage() {
       editing: false,
       timer: { timeStart: 0, timeLeft: convertTimeInMs(+min, +sec) },
     };
-    console.log(data.timer.timeLeft);
     setTodos([...todos, data]);
   }
 
@@ -47,23 +46,24 @@ export default function MainPage() {
     );
   }
 
-  function StopTimer(elemId, time) {
+  function stopTimer(elemId, time) {
     setTodos((todos) =>
       todos.map((todo) => {
         if (todo.id === elemId) {
-          todo.timer.timeLeft = time;
           todo.timer.timeStart = 0;
+          todo.timer.timeLeft = time;
         }
         return todo;
       })
     );
   }
 
-  function startTimer(elemId) {
+  function startTimer(elemId, time) {
     setTodos((todos) =>
       todos.map((todo) => {
         if (todo.id === elemId) {
           todo.timer.timeStart = Date.now();
+          todo.timer.timeLeft = time;
         }
         return todo;
       })
@@ -120,7 +120,7 @@ export default function MainPage() {
         deleteTodo={deleteTodo}
         editTodo={editTodo}
         toggleEditing={toggleEditing}
-        StopTimer={StopTimer}
+        stopTimer={stopTimer}
         startTimer={startTimer}
       />
       <Footer
