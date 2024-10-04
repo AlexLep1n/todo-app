@@ -3,7 +3,7 @@ name: Deploy
 on:
   push:
     branches:
-      - timer
+      - main
 
 jobs:
   build:
